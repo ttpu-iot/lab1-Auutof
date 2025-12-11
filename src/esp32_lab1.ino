@@ -16,26 +16,51 @@
 #define BTN 14 //button port
 #define LSR 33 //light sensor port
 
-//exercise 1: Solution
-/****************************************************/
+// //exercise 1: Solution
+// /****************************************************/
+// void setup(void) {
+//     Serial.begin(9600);
+
+//     pinMode(RED, OUTPUT);
+
+// }
+
+
+// /****************************************************/
+// void loop(void) {
+
+//     digitalWrite(RED,HIGH);
+//     Serial.println("RED ON");
+
+//     delay(500);
+
+//     digitalWrite(RED,LOW);
+//     Serial.println("RED OFF");
+//     delay(500);
+ 
+// }
+
+// Exercise 2: Solution
+
 void setup(void) {
-    Serial.begin(9600);
 
-    pinMode(RED, OUTPUT);
-
+pinMode(GRN, OUTPUT);
+pinMode(BTN, INPUT);
 }
 
-
-/****************************************************/
 void loop(void) {
+static int led_state = 0;
 
-    digitalWrite(RED,HIGH);
-    Serial.println("RED ON");
+static int prev_btn_state = LOW;
 
-    delay(500);
+int btn_state = digitalRead(BTN);
 
-    digitalWrite(RED,LOW);
-    Serial.println("RED OFF");
-    delay(500);
- 
+if (btn_state == HIGH && prev_btn_state == LOW){
+    // button has just been pressed
+digitalWrite(GRN, !led_state);
+
+led_state = !led_state;
+}
+
+prev_btn_state = btn_state;
 }
